@@ -2,15 +2,13 @@
 import Header from '@/components/header/header.astro';
 import type { LangKeys } from '@/lib/config';
 import '@/styles/global.css';
-import type { User } from 'lucia';
 
 interface Props {
   title: string;
-  user?: User;
   lang: LangKeys;
 }
 
-const { title, user, lang } = Astro.props;
+const { title, lang } = Astro.props;
 ---
 
 <!doctype html>
@@ -24,7 +22,7 @@ const { title, user, lang } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="min-h-screen">
-    <Header user={user} lang={lang} />
+    <Header lang={lang} />
     <slot />
   </body>
 </html>

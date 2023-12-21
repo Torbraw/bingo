@@ -1,9 +1,13 @@
 ---
+import type { GetStaticPaths } from 'astro';
 import BaseLayout from '@/layouts/base-layout.astro';
-import { getLangFromUrl } from '@/lib/utils';
+import type { LangKeys } from '@/lib/config';
 
-const lang = getLangFromUrl(Astro.url);
-const session = await Astro.locals.auth.validate();
+export const getStaticPaths = (() => {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'fr' } }];
+}) satisfies GetStaticPaths;
+
+const { lang } = Astro.params;
 ---
 
-<BaseLayout title="Index" lang={lang} user={session?.user} />
+<BaseLayout title="Index" lang={lang as LangKeys} />
