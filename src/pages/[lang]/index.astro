@@ -1,0 +1,9 @@
+---
+import BaseLayout from '@/layouts/base-layout.astro';
+import { getLangFromUrl } from '@/lib/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const session = await Astro.locals.auth.validate();
+---
+
+<BaseLayout title="Index" lang={lang} user={session?.user} />
