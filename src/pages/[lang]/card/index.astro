@@ -38,7 +38,7 @@ for (let i = 0; i < 5; i++) {
 
 <BaseLayout title={t('card')} lang={lang as LangKeys}>
   <div class="flex justify-center p-6">
-    <div class="flex w-full flex-col items-center gap-10">
+    <div class="flex w-full max-w-2xl flex-col items-center gap-10">
       <div class="flex w-full gap-6 print:hidden">
         <Button class="flex-1" id="refresh-btn" name="refresh-btn">{t('regenerateCard')}</Button>
         <Button class="flex-1" id="print-btn" name="print-btn">{t('print')}</Button>
@@ -48,7 +48,9 @@ for (let i = 0; i < 5; i++) {
           <div class="grid grid-flow-col grid-cols-5">
             {
               Object.values(matrix).map((letter) => (
-                <div class="flex h-10 w-20 items-center justify-center text-xl font-bold">{letter}</div>
+                <div class="flex h-10 w-10 items-center justify-center text-xl font-bold print:w-20 md:w-20">
+                  {letter}
+                </div>
               ))
             }
           </div>
