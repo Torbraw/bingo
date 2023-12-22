@@ -1,6 +1,7 @@
 ---
 import type { LangKeys } from '@/lib/config';
 import { useTranslations } from '@/lib/utils';
+import HeaderLink from './header-link.astro';
 
 type Props = {
   lang: LangKeys;
@@ -11,17 +12,20 @@ const { lang, type } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<nav class:list={[{ 'hidden flex-auto lg:flex': type === 'desktop', 'py-4': type === 'mobile' }]}>
+<nav class:list={[{ 'hidden flex-auto lg:flex': type === 'desktop' }]}>
   <ul
     class:list={[
       {
         'flex items-center gap-6': type === 'desktop',
-        'flex flex-col items-center gap-6 text-2xl': type === 'mobile',
+        'flex flex-col items-center text-2xl': type === 'mobile',
       },
     ]}
   >
-    <li>
-      <a class="hover:text-foreground/80" href={`/${lang}`}>{t('index')}</a>
-    </li>
+    <HeaderLink type={type} href={`/${lang}/`}>
+      {t('draw')}
+    </HeaderLink>
+    <HeaderLink type={type} href={`/${lang}/card`}>
+      {t('card')}
+    </HeaderLink>
   </ul>
 </nav>

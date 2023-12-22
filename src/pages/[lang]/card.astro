@@ -1,5 +1,4 @@
 ---
-import { Draw } from '@/components/draw';
 import BaseLayout from '@/layouts/base-layout.astro';
 import { LANGUAGES, type LangKeys } from '@/lib/config';
 import { useTranslations } from '@/lib/utils';
@@ -11,11 +10,7 @@ export const getStaticPaths = () => {
 };
 
 const { lang } = Astro.params;
-const langKey = lang as LangKeys;
-
-const t = useTranslations(langKey);
+const t = useTranslations(lang as LangKeys);
 ---
 
-<BaseLayout title={t('draw')} lang={langKey}>
-  <Draw lang={langKey} client:load />
-</BaseLayout>
+<BaseLayout title={t('card')} lang={lang as LangKeys} />
