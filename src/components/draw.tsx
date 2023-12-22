@@ -30,23 +30,25 @@ export const Draw: Component<Props> = (componentProps) => {
   };
 
   return (
-    <div class="flex flex-col gap-6 p-6">
-      <Button class="w-full" name="draw-btn" onclick={() => handleDraw()} disabled={combinations().length === 0}>
-        {t('draw')}
-      </Button>
-      <Show when={combinations().length === 0}>
-        <p class="text-center text-xl">{t('allDrawned')}</p>
-        <Button name="reset-btn" onclick={() => reset()}>
-          {t('reset')}
+    <div class="flex justify-center p-6">
+      <div class="flex w-full max-w-2xl flex-col gap-6">
+        <Button class="w-full" name="draw-btn" onclick={() => handleDraw()} disabled={combinations().length === 0}>
+          {t('draw')}
         </Button>
-      </Show>
-      <For each={drawnCombinations()}>
-        {(combinaison) => (
-          <Card>
-            <CardHeader class="text-center text-5xl font-bold">{combinaison}</CardHeader>
-          </Card>
-        )}
-      </For>
+        <Show when={combinations().length === 0}>
+          <p class="text-center text-xl">{t('allDrawned')}</p>
+          <Button name="reset-btn" onclick={() => reset()}>
+            {t('reset')}
+          </Button>
+        </Show>
+        <For each={drawnCombinations()}>
+          {(combinaison) => (
+            <Card>
+              <CardHeader class="text-center text-5xl font-bold">{combinaison}</CardHeader>
+            </Card>
+          )}
+        </For>
+      </div>
     </div>
   );
 };

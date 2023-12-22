@@ -13,7 +13,7 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<header class="flex h-12 items-center border-b border-border px-4 lg:px-8">
+<header class="flex h-12 items-center border-b border-border px-4 print:hidden lg:px-8">
   <div class="flex flex-1">
     <div class="flex w-full gap-6 font-medium">
       <HeaderNav type="desktop" lang={lang} />

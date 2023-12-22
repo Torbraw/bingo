@@ -7,6 +7,8 @@ export const ui = {
     card: 'Carte',
     allDrawned: 'Toutes les combinaisons ont été tirées.',
     reset: 'Réinitialiser',
+    regenerateCard: 'Régénérer une carte',
+    print: 'Imprimer',
   },
   en: {
     '404': '404 Page not found',
@@ -14,5 +16,7 @@ export const ui = {
     card: 'Card',
     allDrawned: 'All combinations have been drawn.',
     reset: 'Reset',
+    regenerateCard: 'Regenerate card',
+    print: 'Print',
   },
 } as const satisfies Record<LangKeys, Record<string, string>>;
