@@ -32,14 +32,12 @@ export const Draw: Component<Props> = (componentProps) => {
   return (
     <div class="flex justify-center p-6">
       <div class="flex w-full max-w-2xl flex-col gap-6">
-        <Button class="w-full" name="draw-btn" onclick={() => handleDraw()} disabled={combinations().length === 0}>
+        <Button class="w-full" onclick={() => handleDraw()} disabled={combinations().length === 0}>
           {t('draw')}
         </Button>
         <Show when={combinations().length === 0}>
           <p class="text-center text-xl">{t('allDrawned')}</p>
-          <Button name="reset-btn" onclick={() => reset()}>
-            {t('reset')}
-          </Button>
+          <Button onclick={() => reset()}>{t('reset')}</Button>
         </Show>
         <For each={drawnCombinations()}>
           {(combinaison) => (

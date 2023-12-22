@@ -84,3 +84,5 @@ export const bingoCombinations = [
   'O-74',
   'O-75',
 ];
+
+export const baseUrl = 'bingo';

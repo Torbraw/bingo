@@ -3,7 +3,8 @@ import ThemeToggle from './theme-toggle.astro';
 import type { LangKeys } from '@/lib/config';
 import { Button } from '../ui/button';
 import HeaderNav from './header-nav.astro';
-import { MenuIcon } from '@/components/common/icons';
+import { MenuIcon, GithubIcon } from '@/components/common/icons';
+import { buttonVariants } from '../ui/button';
 import { LanguageSelect } from './language-select';
 
 interface Props {
@@ -30,8 +31,15 @@ const { lang } = Astro.props;
   </div>
   <div class="flex justify-end gap-4">
     <LanguageSelect client:visible lang={lang} class="hidden lg:block" />
+    <a
+      href="https://github.com/Torbraw/bingo"
+      class:list={[buttonVariants({ variant: 'ghost', size: 'icon' }), 'transition-none']}
+    >
+      <span class="sr-only">Github</span>
+      <GithubIcon class="h-6 w-6" />
+    </a>
     <ThemeToggle />
-    <Button name="mobile-menu" variant="ghost" size="icon" class="lg:hidden" id="mobile-menu-btn">
+    <Button aria-label="mobile-menu" variant="ghost" size="icon" class="lg:hidden" id="mobile-menu-btn">
       <MenuIcon class="h-6 w-6 text-foreground" />
     </Button>
   </div>

@@ -1,5 +1,5 @@
 ---
-import type { LangKeys } from '@/lib/config';
+import { baseUrl, type LangKeys } from '@/lib/config';
 import { useTranslations } from '@/lib/utils';
 import HeaderLink from './header-link.astro';
 
@@ -21,10 +21,10 @@ const t = useTranslations(lang);
       },
     ]}
   >
-    <HeaderLink type={type} href={`/${lang}/`}>
+    <HeaderLink type={type} href={`/${baseUrl}/${lang}/`}>
       {t('draw')}
     </HeaderLink>
-    <HeaderLink type={type} href={`/${lang}/card`}>
+    <HeaderLink type={type} href={`/${baseUrl}/${lang}/card`}>
       {t('card')}
     </HeaderLink>
   </ul>
