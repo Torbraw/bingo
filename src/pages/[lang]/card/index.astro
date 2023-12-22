@@ -28,6 +28,11 @@ for (let i = 0; i < 5; i++) {
   const combinations = bingoCombinations.filter((c) => c.startsWith(matrix[i as keyof typeof matrix]));
 
   for (let j = 0; j < 5; j++) {
+    if (i === 2 && j === 2) {
+      drawnedCombinations.push('FREE');
+      continue;
+    }
+
     const index = Math.floor(Math.random() * combinations.length);
     const combination = combinations[index];
     drawnedCombinations.push(combination.split('-')[1]);
