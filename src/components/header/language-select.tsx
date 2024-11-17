@@ -23,8 +23,9 @@ export const LanguageSelect: Component<Props> = (componentProps) => {
   const [local, _rest] = splitProps(componentProps, ['lang', 'class']);
 
   const handleSelect = (code: string): void => {
-    const [, , ...rest] = window.location.pathname.split('/');
-    window.location.pathname = `/${code}/${rest.join('/')}`;
+    const selected = languageOptions.find((option) => option.value === local.lang) as LanguageOption;
+    const x = window.location.pathname.replace(selected.value, code);
+    window.location.pathname = x;
   };
 
   return (

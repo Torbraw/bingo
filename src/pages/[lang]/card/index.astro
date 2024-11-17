@@ -1,9 +1,7 @@
 ---
-import CardTile from '@/components/card-tile.astro';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { BingoCard } from '@/components/bingo-card';
 import BaseLayout from '@/layouts/base-layout.astro';
-import { LANGUAGES, bingoCombinations, type LangKeys } from '@/lib/config';
+import { LANGUAGES, type LangKeys } from '@/lib/config';
 import { useTranslations } from '@/lib/utils';
 
 export const getStaticPaths = () => {
@@ -14,70 +12,10 @@ export const getStaticPaths = () => {
 
 const { lang } = Astro.params;
 const t = useTranslations(lang as LangKeys);
-
-const drawnedCombinations: string[] = [];
-const matrix = {
-  0: 'B',
-  1: 'I',
-  2: 'N',
-  3: 'G',
-  4: 'O',
-};
-
-for (let i = 0; i < 5; i++) {
-  const combinations = bingoCombinations.filter((c) => c.startsWith(matrix[i as keyof typeof matrix]));
-
-  for (let j = 0; j < 5; j++) {
-    if (i === 2 && j === 2) {
-      drawnedCombinations.push('FREE');
-      continue;
-    }
-
-    const index = Math.floor(Math.random() * combinations.length);
-    const combination = combinations[index];
-    drawnedCombinations.push(combination.split('-')[1]);
-    combinations.splice(index, 1);
-  }
-}
 ---
 
 <BaseLayout title={t('card')} lang={lang as LangKeys}>
   <div class="flex justify-center p-6">
-    <div class="flex w-full max-w-2xl flex-col items-center gap-10">
-      <div class="flex w-full gap-6 print:hidden">
-        <Button class="flex-1" id="refresh-btn">{t('regenerateCard')}</Button>
-        <Button class="flex-1" id="print-btn">{t('print')}</Button>
-      </div>
-      <Card class="max-w-fit print:border-neutral-950 print:text-neutral-950">
-        <CardHeader>
-          <div class="grid grid-flow-col grid-cols-5">
-            {
-              Object.values(matrix).map((letter) => (
-                <div class="flex h-10 w-10 items-center justify-center text-xl font-bold print:w-20 md:w-20">
-                  {letter}
-                </div>
-              ))
-            }
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div class="grid grid-flow-col grid-cols-5 grid-rows-5">
-            {drawnedCombinations.map((combination) => <CardTile>{combination}</CardTile>)}
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+    <BingoCard client:load lang={lang as LangKeys} />
   </div>
 </BaseLayout>
-
-<script>
-  const refreshBtn = document.getElementById('refresh-btn');
-  refreshBtn?.addEventListener('click', () => {
-    location.reload();
-  });
-
-  const printBtn = document.getElementById('print-btn');
-  printBtn?.addEventListener('click', () => {
-    window.print();
-  });
-</script>
