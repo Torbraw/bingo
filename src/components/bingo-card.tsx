@@ -1,8 +1,8 @@
 import { type Component, createSignal, For, onMount, splitProps } from 'solid-js';
 import { Card, CardContent, CardHeader } from './ui/card';
-import { bingoCombinations, type LangKeys } from '@/lib/config';
+import { BINGO, type LangKeys } from '@/lib/config';
 import { Button } from './ui/button';
-import { useTranslations } from '@/lib/utils';
+import { buildBingoCombinaisons, useTranslations } from '@/lib/utils';
 
 type Props = {
   lang: LangKeys;
@@ -14,19 +14,13 @@ export const BingoCard: Component<Props> = (componentProps) => {
   const t = useTranslations(local.lang);
 
   const [finalCombinations, setFinalCombinations] = createSignal<string[]>([]);
-  const matrix = {
-    0: 'B',
-    1: 'I',
-    2: 'N',
-    3: 'G',
-    4: 'O',
-  };
 
   const draw = () => {
+    const bingoCombinations = buildBingoCombinaisons();
     const drawnedCombinations = [];
 
     for (let i = 0; i < 5; i++) {
-      const combinations = bingoCombinations.filter((c) => c.startsWith(matrix[i as keyof typeof matrix]));
+      const combinations = bingoCombinations.filter((c) => c.startsWith(BINGO[i]));
 
       for (let j = 0; j < 5; j++) {
         if (i === 2 && j === 2) {
@@ -64,7 +58,7 @@ export const BingoCard: Component<Props> = (componentProps) => {
       <Card class="max-w-fit print:border-neutral-950 print:text-neutral-950">
         <CardHeader>
           <div class="grid grid-flow-col grid-cols-5">
-            <For each={Object.values(matrix)}>
+            <For each={BINGO.split('')}>
               {(letter) => (
                 <div class="flex h-10 w-10 items-center justify-center text-xl font-bold print:w-20 md:w-20">
                   {letter}

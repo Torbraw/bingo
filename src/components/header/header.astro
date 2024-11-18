@@ -6,6 +6,7 @@ import HeaderNav from './header-nav.astro';
 import { MenuIcon, GithubIcon } from '@/components/common/icons';
 import { buttonVariants } from '../ui/button';
 import { LanguageSelect } from './language-select';
+import { MaxNumber } from './max-number';
 
 interface Props {
   lang: LangKeys;
@@ -19,10 +20,11 @@ const { lang } = Astro.props;
     <div class="flex w-full gap-6 font-medium">
       <HeaderNav type="desktop" lang={lang} />
       <div
-        class="fixed bottom-0 left-0 right-0 top-[48px] z-50 hidden w-full overflow-y-auto bg-background lg:hidden"
+        class="fixed bottom-0 left-0 right-0 top-[48px] z-50 hidden overflow-y-auto bg-background lg:hidden"
         id="mobile-menu"
       >
-        <div class="flex flex-row justify-center gap-8 border-b border-border p-4">
+        <div class="flex flex-col items-center gap-4 border-b border-border p-4">
+          <MaxNumber client:only />
           <LanguageSelect client:visible lang={lang} />
         </div>
         <HeaderNav lang={lang} type="mobile" />
@@ -30,6 +32,7 @@ const { lang } = Astro.props;
     </div>
   </div>
   <div class="flex justify-end gap-4">
+    <MaxNumber client:only class="hidden lg:block" />
     <LanguageSelect client:visible lang={lang} class="hidden lg:block" />
     <a
       href="https://github.com/Torbraw/bingo"

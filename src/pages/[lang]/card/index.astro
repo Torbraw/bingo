@@ -16,6 +16,6 @@ const t = useTranslations(lang as LangKeys);
 
 <BaseLayout title={t('card')} lang={lang as LangKeys}>
   <div class="flex justify-center p-6">
-    <BingoCard client:load lang={lang as LangKeys} />
+    <BingoCard client:only lang={lang as LangKeys} />
   </div>
 </BaseLayout>
